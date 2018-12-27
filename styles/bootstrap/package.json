@@ -1,0 +1,52 @@
+{
+  "_from": "bootstrap-scss",
+  "_id": "bootstrap-scss@4.1.3",
+  "_inBundle": false,
+  "_integrity": "sha512-WZndnzDpxSvMBu+tGUNpo9PkDfsSMoixmc3L9Jlebl5stwGjv5VP6Y6RLo+hCwADmplio+8hTac5b/G3Id428Q==",
+  "_location": "/bootstrap-scss",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "bootstrap-scss",
+    "name": "bootstrap-scss",
+    "escapedName": "bootstrap-scss",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bootstrap-scss/-/bootstrap-scss-4.1.3.tgz",
+  "_shasum": "a39929de0a46cabf89566b18477403260401fc4c",
+  "_spec": "bootstrap-scss",
+  "_where": "/Users/shrutika/Sites/projects/flutterlearn-v2",
+  "author": {
+    "name": "Cristian Trifan",
+    "email": "criss.trifan@gmail.com",
+    "url": "https://crissdev.com"
+  },
+  "bugs": {
+    "url": "https://github.com/crissdev/bootstrap-scss/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Bootstrap's SCSS files (only)",
+  "homepage": "https://github.com/crissdev/bootstrap-scss",
+  "keywords": [
+    "bootstrap",
+    "bootstrap-scss",
+    "responsive",
+    "scss"
+  ],
+  "license": "MIT",
+  "main": "bootstrap.scss",
+  "name": "bootstrap-scss",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crissdev/bootstrap-scss.git"
+  },
+  "version": "4.1.3"
+}
