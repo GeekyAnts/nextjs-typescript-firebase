@@ -14,7 +14,10 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-          <Link href="/signin"> Link to singin page </Link>
+        <div>
+          <Link href="/signin">
+            <a>Link to signin page</a>
+          </Link>
         </div>
       </Provider>
     );

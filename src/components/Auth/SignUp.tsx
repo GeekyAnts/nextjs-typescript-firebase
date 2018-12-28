@@ -22,7 +22,7 @@ class SignUp extends Component {
         <div className={styles.panel}>
           <form onSubmit={this.handleSubmit}>
             <div className={styles['form-group']}>
-              <label for="emailInput"> Email</label>
+              <label htmlFor="emailInput"> Email</label>
               <input
                 id="emailInput"
                 className={styles['form-control']}
@@ -32,7 +32,7 @@ class SignUp extends Component {
               />
             </div>
             <div className={styles['form-group']}>
-              <label for="passwordInput"> Password</label>
+              <label htmlFor="passwordInput"> Password</label>
               <input
                 className={styles['form-control']}
                 id="passwordInput"

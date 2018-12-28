@@ -22,7 +22,7 @@ class SignIn extends Component {
         <div className={styles.panel}>
           <form onSubmit={this.handleSubmit}>
             <div className={styles['form-group']}>
-              <label for="emailInput"> Email Address</label>
+              <label htmlFor="emailInput"> Email Address</label>
               <input
                 className={styles['form-control']}
                 id="emailInput"
@@ -37,7 +37,7 @@ class SignIn extends Component {
                 styles['no-bottom-margin']
               ].join(' ')}
             >
-              <label for="passwordInput"> Password</label>
+              <label htmlFor="passwordInput"> Password</label>
               <input
                 id="password"
                 className={[styles['form-control']].join(' ')}
@@ -64,7 +64,11 @@ class SignIn extends Component {
             </button>
             <small className={styles['center-text']}>
               {' '}
-              not a user , register <Link href="/signup"> here </Link>{' '}
+              not a user , register{' '}
+              <Link href="/signup">
+                {' '}
+                <a>here</a>{' '}
+              </Link>{' '}
             </small>
           </form>
         </div>

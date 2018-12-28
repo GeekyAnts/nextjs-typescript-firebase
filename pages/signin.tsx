@@ -1,9 +1,9 @@
-import store from '../../src/redux/store';
+import store from '../src/redux/store';
 import { Provider } from 'react-redux';
 import React from 'react';
-import * as styles from '../../styles/main.scss';
+import * as styles from '../styles/main.scss';
 import Head from 'next/head';
-import SignIn from '../../src/components/Auth/SignIn';
+import SignIn from '../src/components/Auth/SignIn';
 import Link from 'next/link';
 
 // import { connect } from 'react-redux';
