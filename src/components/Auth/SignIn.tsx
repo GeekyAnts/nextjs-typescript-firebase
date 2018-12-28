@@ -66,8 +66,7 @@ class SignIn extends Component {
               {' '}
               not a user , register{' '}
               <Link href="/signup">
-                {' '}
-                <a>here</a>{' '}
+                <a>here</a>
               </Link>{' '}
             </small>
           </form>

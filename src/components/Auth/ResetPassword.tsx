@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import { signUpUser } from '../../redux/actions';
 import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
+import Router from 'next/router';
 
 class ResetPassword extends Component {
   state = {
@@ -16,6 +17,7 @@ class ResetPassword extends Component {
     //checkPassword then
     if (this.state.newPassword === this.state.currentPassword) {
       //this.props.resetPassword(this.state.newPassword) ;}
+      Router.push('/signin');
     }
   };
   render() {
