@@ -1,1 +1,21 @@
 @import 'bootstrap/bootstrap.scss';
+
+.centered-container {
+  padding: 10% 20% 20% 20%;
+}
+
+.submit-button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 40px;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+.center-text {
+  text-align: center;
+  display: block;
+}
