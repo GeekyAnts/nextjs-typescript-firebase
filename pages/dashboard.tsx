@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import Link from 'next/link';
 import NavBar from '../src/components/Navigation/NavBar';
-import * as styles from '../styles/main.scss';
 
 export default class extends React.Component {
   render() {

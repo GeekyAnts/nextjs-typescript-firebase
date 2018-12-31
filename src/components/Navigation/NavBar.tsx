@@ -54,9 +54,12 @@ class NavBar extends Component {
               >
                 Change Profile Picture
               </span>
-              <a className={styles['dropdown-item']} href="#!">
+              <span
+                className={styles['dropdown-item']}
+                onClick={() => Router.push('/profile/profile-details-update')}
+              >
                 Update Profile Details
-              </a>
+              </span>
             </div>
           </div>
         </div>
