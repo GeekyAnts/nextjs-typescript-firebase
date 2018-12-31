@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as styles from '../../../styles/main.scss';
 import { connect } from 'react-redux';
 
-export class ProfilePictureUpdate extends Component {
+export class ProfilePictureUpdate extends Component<{ user }, any> {
   state = {
     selectedFile: null
   };
@@ -40,7 +40,9 @@ export class ProfilePictureUpdate extends Component {
         </div>
         <div className={styles['form-group']}>
           {' '}
-          <label for="profilePicTureInput">Upload A New Profile Picture </label>
+          <label htmlFor="profilePicTureInput">
+            Upload A New Profile Picture{' '}
+          </label>
           <input
             id="profilePicTureInput"
             className={styles['form-control-file']}

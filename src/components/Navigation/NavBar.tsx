@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
+import Link from 'next/link';
 import * as styles from '../../../styles/main.scss';
 
 class NavBar extends Component {
-  state = {};
+  state = {
+    dropdownOpen: false
+  };
   render() {
     return (
       <nav
@@ -13,9 +16,11 @@ class NavBar extends Component {
           styles['bg-dark']
         ].join(' ')}
       >
-        <a class="navbar-brand" href="/dashboard">
-          Dashboard
-        </a>
+        <span className="navbar-brand">
+          <Link href="/dashboard">
+            <a>Dashboard</a>
+          </Link>
+        </span>
 
         <div className={styles['navbar-nav']}>
           <div className={[styles['nav-item'], styles['dropdown']].join(' ')}>
@@ -26,9 +31,6 @@ class NavBar extends Component {
               id="navbarDropdownMenuLink"
               role="button"
               tabIndex={0}
-              dataToggle="dropdown"
-              ariaHaspopup="true"
-              ariaExpanded="false"
               onClick={() =>
                 this.setState({ dropdownOpen: !this.state.dropdownOpen })
               }
@@ -41,7 +43,6 @@ class NavBar extends Component {
                 styles['dropdown-menu-right'],
                 styles['dropdown-default']
               ].join(' ')}
-              aria-labelledby="navbarDropdownMenuLink"
               style={
                 this.state.dropdownOpen
                   ? { display: 'block', position: 'absolute' }

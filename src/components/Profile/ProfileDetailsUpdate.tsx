@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import * as styles from '../../../styles/main.scss';
 import { updateUser } from '../../redux/actions';
+import { IUser } from '../../interfaces';
 
-class ProfileDetailsUpdate extends Component {
-  state: {
-    name: string;
-    email: string;
-    gender: string;
-    dob: string;
-  } = {
+class ProfileDetailsUpdate extends React.Component<
+  { user; updateUser: Function },
+  IUser
+> {
+  state: IUser = {
     name: '',
-    email: '',
+    email: undefined,
     gender: '',
-    dob: 'dd/mm/yyy'
+    dob: ''
   };
   componentDidMount() {
     this.setState(this.props.user);
@@ -73,12 +72,15 @@ class ProfileDetailsUpdate extends Component {
                 id="emailInput"
                 className={styles['form-control']}
                 type="email"
-                value={this.state.email}
+                defaultValue={this.state.email}
                 name="email"
-                onChange={event => this.setState({ email: event.target.value })}
+                onChange={event =>
+                  event.target.value &&
+                  this.setState({ email: event.target.value })
+                }
               />
             </div>
-
+            {console.log(this.state)}
             <button
               className={[
                 styles['btn-primary'],

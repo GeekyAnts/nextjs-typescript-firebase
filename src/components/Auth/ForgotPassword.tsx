@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ class ForgotPassword extends Component {
     otpConfirmed: false
   };
 
-  handleEmailSubmit = (event: Event) => {
+  handleEmailSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     //confirm if email exists
@@ -22,7 +22,7 @@ class ForgotPassword extends Component {
     this.setState({ emailConfirmed: true });
   };
 
-  handleOtpSubmit = (event: Event) => {
+  handleOtpSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     //confirm if otp is valid
@@ -30,7 +30,7 @@ class ForgotPassword extends Component {
     this.setState({ otpConfirmed: true });
   };
 
-  handlePasswordSubmit = (event: Event) => {
+  handlePasswordSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (this.state.newPassword === this.state.confirmPassword) {
       Router.push('/');

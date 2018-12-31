@@ -4,12 +4,19 @@ import { signUpUser } from '../../redux/actions';
 import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
 import Router from 'next/router';
+import { IUserSignUp } from '../../interfaces';
 
-class SignUp extends Component {
+class SignUp extends Component<{
+  user: IUserSignUp;
+  signUpUser: (user: IUserSignUp) => Promise<string>;
+}> {
   state = {
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    gender: '',
+    dob: '',
+    name: ''
   };
 
   handleSubmit = event => {

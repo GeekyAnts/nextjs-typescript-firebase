@@ -3,9 +3,19 @@ import { connect } from 'react-redux';
 import { signInUser } from '../../redux/actions';
 import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
+import { IUser } from '../../interfaces';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
-class SignIn extends Component {
+class SignIn extends Component<
+  {
+    user: IUser;
+    signInUser: (user: { email: string; password: string }) => Promise<string>;
+  },
+  {
+    email: string;
+    password: string;
+  }
+> {
   state = {
     email: '',
     password: ''

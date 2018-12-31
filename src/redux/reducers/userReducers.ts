@@ -2,7 +2,7 @@ import { Reducer, AnyAction } from 'redux';
 import { Interface } from 'readline';
 
 const INITIAL_STATE = {
-  email: null
+  email: undefined
 };
 
 interface Iuser {
