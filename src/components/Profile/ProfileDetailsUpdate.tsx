@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as styles from '../../../styles/main.scss';
+import { updateUser } from '../../redux/actions';
 
 class ProfileDetailsUpdate extends Component {
   state: {
@@ -20,7 +21,8 @@ class ProfileDetailsUpdate extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('updated user', this.state);
+    // console.log('updated user', this.state);
+    this.props.updateUser(this.state);
   };
   render() {
     return (
@@ -35,7 +37,7 @@ class ProfileDetailsUpdate extends Component {
                 type="text"
                 value={this.state.name}
                 name="name"
-                onChange={event => (this.state.name = event.target.value)}
+                onChange={event => this.setState({ name: event.target.value })}
               />
             </div>
             <div className={styles['form-group']}>
@@ -46,7 +48,7 @@ class ProfileDetailsUpdate extends Component {
                 type="date"
                 value={this.state.dob}
                 name="dob"
-                onChange={event => (this.state.dob = event.target.value)}
+                onChange={event => this.setState({ dob: event.target.value })}
               />
             </div>
             <div className={styles['form-group']}>
@@ -56,7 +58,9 @@ class ProfileDetailsUpdate extends Component {
                 className={styles['form-control']}
                 value={this.state.gender}
                 name="gender"
-                onChange={event => (this.state.gender = event.target.value)}
+                onChange={event =>
+                  this.setState({ gender: event.target.value })
+                }
               >
                 <option> male </option>
                 <option> female </option>
@@ -71,7 +75,7 @@ class ProfileDetailsUpdate extends Component {
                 type="email"
                 value={this.state.email}
                 name="email"
-                onChange={event => (this.state.email = event.target.value)}
+                onChange={event => this.setState({ email: event.target.value })}
               />
             </div>
 
@@ -97,4 +101,7 @@ const mapStateToProps = ({ user }) => {
   return { user };
 };
 
-export default connect(mapStateToProps)(ProfileDetailsUpdate);
+export default connect(
+  mapStateToProps,
+  { updateUser }
+)(ProfileDetailsUpdate);

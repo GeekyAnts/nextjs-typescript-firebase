@@ -16,7 +16,7 @@ class ForgotPassword extends Component {
 
   handleEmailSubmit = (event: Event) => {
     event.preventDefault();
-    // console.log(this.props);
+
     //confirm if email exists
     //then
     this.setState({ emailConfirmed: true });
@@ -24,7 +24,7 @@ class ForgotPassword extends Component {
 
   handleOtpSubmit = (event: Event) => {
     event.preventDefault();
-    // console.log(this.props);
+
     //confirm if otp is valid
     //then
     this.setState({ otpConfirmed: true });
@@ -156,7 +156,6 @@ class ForgotPassword extends Component {
     );
   };
   render() {
-    console.log(this.state);
     return (
       <div className="forgot-password">
         <div className={styles.panel}>{this.forgotPasswordForm()}</div>

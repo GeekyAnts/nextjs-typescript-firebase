@@ -15,7 +15,6 @@ class SignUp extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    console.log(this.props);
     this.state.confirmPassword === this.state.password &&
       this.props.signUpUser({ ...this.state }).then(() => {
         Router.push('/dashboard');
@@ -23,7 +22,7 @@ class SignUp extends Component {
   };
   render() {
     var passMatch: boolean = false;
-    console.log(this.state);
+
     if (
       !this.state.confirmPassword ||
       this.state.password === this.state.confirmPassword

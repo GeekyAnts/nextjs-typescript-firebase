@@ -33,3 +33,16 @@ export const signUpUser = ({ email, gender, dob, name, password }: IUser) => {
     return true;
   };
 };
+export const updateUser = (user: {
+  email: string;
+  gender: string;
+  dob: string;
+  name: string;
+}) => {
+  return async dispatch => {
+    // regster user here
+
+    await dispatch(setUser(user, false));
+    return true;
+  };
+};

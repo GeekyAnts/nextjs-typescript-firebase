@@ -8,11 +8,9 @@ export class ProfilePictureUpdate extends Component {
   };
 
   handleSelectedFile = event => {
-    console.log(event.target.files[0]);
     this.setState({
       selectedFile: event.target.files[0]
     });
-    console.log(this.state);
   };
 
   handleUpload = () => {
@@ -20,7 +18,6 @@ export class ProfilePictureUpdate extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div
         className={styles.container}
