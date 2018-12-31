@@ -1,10 +1,15 @@
-export const setUser = (user, error) => ({
+interface IUser {
+  email: string;
+  password: string;
+}
+
+export const setUser = (user: { email: string }, error: any) => ({
   type: 'SET_USER',
   payload: user,
   error
 });
 
-export const signInUser = ({ email, password }) => {
+export const signInUser = ({ email, password }: IUser) => {
   return dispatch => {
     // sign in user here
 
@@ -12,11 +17,11 @@ export const signInUser = ({ email, password }) => {
     return true;
   };
 };
-export const signUpUser = ({ email, password }) => {
-  return dispatch => {
+export const signUpUser = ({ email, password }: IUser) => {
+  return async dispatch => {
     // regster user here
 
-    dispatch(setUser({ email }, false));
+    await dispatch(setUser({ email }, false));
     return true;
   };
 };

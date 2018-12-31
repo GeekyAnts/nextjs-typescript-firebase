@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as styles from '../../../styles/main.scss';
+import { connect } from 'react-redux';
 
-export default class extends Component {
+export class ProfilePictureUpdate extends Component {
   state = {
     selectedFile: null
   };
@@ -19,6 +20,7 @@ export default class extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div
         className={styles.container}
@@ -65,3 +67,9 @@ export default class extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ user }) => {
+  return { user };
+};
+
+export default connect(mapStateToProps)(ProfilePictureUpdate);

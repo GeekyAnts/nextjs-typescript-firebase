@@ -14,7 +14,7 @@ class ForgotPassword extends Component {
     otpConfirmed: false
   };
 
-  handleEmailSubmit = event => {
+  handleEmailSubmit = (event: Event) => {
     event.preventDefault();
     // console.log(this.props);
     //confirm if email exists
@@ -22,7 +22,7 @@ class ForgotPassword extends Component {
     this.setState({ emailConfirmed: true });
   };
 
-  handleOtpSubmit = event => {
+  handleOtpSubmit = (event: Event) => {
     event.preventDefault();
     // console.log(this.props);
     //confirm if otp is valid
@@ -30,7 +30,7 @@ class ForgotPassword extends Component {
     this.setState({ otpConfirmed: true });
   };
 
-  handlePasswordSubmit = event => {
+  handlePasswordSubmit = (event: Event) => {
     event.preventDefault();
     if (this.state.newPassword === this.state.confirmPassword) {
       Router.push('/');

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { signUpUser } from '../../redux/actions';
 import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
+import Router from 'next/router';
 
 class SignUp extends Component {
   state = {
@@ -13,7 +14,9 @@ class SignUp extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log(this.props);
-    this.props.signUpUser({ ...this.state });
+    this.props.signUpUser({ ...this.state }).then(() => {
+      Router.push('/dashboard');
+    });
   };
   render() {
     console.log(this.state);

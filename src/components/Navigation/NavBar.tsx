@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Router from 'next/router';
 import * as styles from '../../../styles/main.scss';
 
 class NavBar extends Component {
@@ -12,7 +13,7 @@ class NavBar extends Component {
           styles['bg-dark']
         ].join(' ')}
       >
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/dashboard">
           Dashboard
         </a>
 
@@ -47,12 +48,12 @@ class NavBar extends Component {
                   : {}
               }
             >
-              <a
+              <span
                 className={styles['dropdown-item']}
-                href="/profile/profile-picture-update"
+                onClick={() => Router.push('/profile/profile-picture-update')}
               >
                 Change Profile Picture
-              </a>
+              </span>
               <a className={styles['dropdown-item']} href="#!">
                 Update Profile Details
               </a>
