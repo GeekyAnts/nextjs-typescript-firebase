@@ -3,11 +3,14 @@ const withSass = require('@zeit/next-sass');
 
 module.exports = withTypescript(
   withSass({
-    webpack(config, options) {
-      
-      return config;
-    },
     cssModules: true,
-    sassLoaderOptions: {}
+
+    sassLoaderOptions: {
+      includePaths: [require('path').resolve(__dirname, 'node_modules')]
+    },
+
+    webpack(config, options) {
+      return config;
+    }
   })
 );
