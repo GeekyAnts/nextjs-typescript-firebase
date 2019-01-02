@@ -3,10 +3,11 @@ import Router from 'next/router';
 import Link from 'next/link';
 import * as styles from '../../../styles/main.scss';
 
-class NavBar extends Component <{} , {}> {
-  state = {
-    dropdownOpen: false
-  };
+class NavBar extends Component<{}, { dropdownOpen: boolean }> {
+  constructor(props) {
+    super(props);
+    this.state = { dropdownOpen: false };
+  }
   render() {
     return (
       <nav
@@ -32,7 +33,10 @@ class NavBar extends Component <{} , {}> {
               role="button"
               tabIndex={0}
               onClick={() =>
-                this.setState({ dropdownOpen: !this.state.dropdownOpen })
+                this.setState({
+                  dropdownOpen: !this.state.dropdownOpen
+                  // dropdownOpen: true
+                })
               }
             >
               Profile
@@ -44,7 +48,7 @@ class NavBar extends Component <{} , {}> {
                 styles['dropdown-default']
               ].join(' ')}
               style={
-                this.state.dropdownOpen
+                this.state && this.state.dropdownOpen
                   ? { display: 'block', position: 'absolute' }
                   : {}
               }
