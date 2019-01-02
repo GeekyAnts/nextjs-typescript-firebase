@@ -3,7 +3,7 @@ import Router from 'next/router';
 import Link from 'next/link';
 import * as styles from '../../../styles/main.scss';
 
-class NavBar extends Component {
+class NavBar extends Component <{} , {}> {
   state = {
     dropdownOpen: false
   };

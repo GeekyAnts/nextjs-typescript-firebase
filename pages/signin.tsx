@@ -11,7 +11,7 @@ import Link from 'next/link';
 class Signin extends React.Component<any, any> {
   render() {
     return (
-      <Provider store={store}>
+      <div>
         <Head>
           <title>Sign In</title>
         </Head>
@@ -20,7 +20,7 @@ class Signin extends React.Component<any, any> {
         >
           <SignIn />
         </div>
-      </Provider>
+      </div>
     );
   }
 }

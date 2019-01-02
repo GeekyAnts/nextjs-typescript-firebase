@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { signUpUser } from '../../redux/actions';
 import * as styles from '../../../styles/main.scss';
@@ -6,10 +6,13 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { IUserSignUp } from '../../interfaces';
 
-class SignUp extends Component<{
-  user: IUserSignUp;
-  signUpUser: (user: IUserSignUp) => Promise<string>;
-}> {
+class SignUp extends React.Component<
+  {
+    user: IUserSignUp;
+    signUpUser: (user: IUserSignUp) => Promise<string>;
+  },
+  any
+> {
   state = {
     email: '',
     password: '',

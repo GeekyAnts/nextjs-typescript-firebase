@@ -8,13 +8,11 @@ import * as styles from '../styles/main.scss';
 export default class extends React.Component {
   render() {
     return (
-      <Provider store={store}>
-        <div
-          className={[styles.container, styles['centered-container']].join(' ')}
-        >
-          <ResetPassword />
-        </div>
-      </Provider>
+      <div
+        className={[styles.container, styles['centered-container']].join(' ')}
+      >
+        <ResetPassword />
+      </div>
     );
   }
 }

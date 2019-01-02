@@ -13,13 +13,11 @@ class App extends React.Component {
   }
   render() {
     return (
-      <Provider store={store}>
-        <div>
-          <Link href="/signin">
-            <a>Link to signin page</a>
-          </Link>
-        </div>
-      </Provider>
+      <div>
+        <Link href="/signin">
+          <a>Link to signin page</a>
+        </Link>
+      </div>
     );
   }
 }

@@ -8,14 +8,14 @@ import ProfileDetailsUpdate from '../../src/components/Profile/ProfileDetailsUpd
 export default class extends React.Component {
   render() {
     return (
-      <Provider store={store}>
+      <div>
         <NavBar />
         <div
           className={[styles.container, styles['centered-container']].join(' ')}
         >
           <ProfileDetailsUpdate />
         </div>
-      </Provider>
+      </div>
     );
   }
 }

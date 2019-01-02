@@ -7,10 +7,10 @@ import ProfilePictureUpdate from '../../src/components/Profile/ProfilePictureUpd
 export default class extends React.Component {
   render() {
     return (
-      <Provider store={store}>
+      <div>
         <NavBar />
         <ProfilePictureUpdate />
-      </Provider>
+      </div>
     );
   }
 }

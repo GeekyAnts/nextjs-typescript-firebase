@@ -1,5 +1,4 @@
 import { Reducer, AnyAction } from 'redux';
-import { Interface } from 'readline';
 
 const INITIAL_STATE = {
   email: undefined

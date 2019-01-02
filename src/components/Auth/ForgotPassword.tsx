@@ -1,10 +1,11 @@
-import React, { Component, FormEvent } from 'react';
-import { connect } from 'react-redux';
+import * as React from 'react';
+import { Component, FormEvent } from 'react';
+// import { connect } from 'react-redux';
 import * as styles from '../../../styles/main.scss';
-import Link from 'next/link';
+// import Link from 'next/link';
 import Router from 'next/router';
 
-class ForgotPassword extends Component {
+class ForgotPassword extends Component<any, any> {
   state = {
     email: null,
     otp: null,
