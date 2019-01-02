@@ -80,7 +80,6 @@ class ProfileDetailsUpdate extends React.Component<
                 }
               />
             </div>
-            {console.log(this.state)}
             <button
               className={[
                 styles['btn-primary'],
