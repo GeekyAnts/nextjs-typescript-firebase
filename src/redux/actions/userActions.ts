@@ -1,10 +1,25 @@
 import { IUserSignUp, IUser } from '../../interfaces';
-
+import { fbSignInUser, fbSignUpUser, fbCheckAuth } from '../../firebase/auth';
 export const setUser = (user: IUser, error: any) => ({
   type: 'SET_USER',
   payload: user,
   error
 });
+export const setAuth = (status: boolean, error: any) => ({
+  type: 'SET_AUTH',
+  payload: status,
+  error
+});
+
+export const fetchUser = () => {
+  return dispatch => {
+    fbCheckAuth(user => {
+      user
+        ? (dispatch(setAuth(true, false)), dispatch(setUser(user, false)))
+        : dispatch(setAuth(false, false));
+    });
+  };
+};
 
 export const signInUser = ({
   email,
@@ -15,10 +30,21 @@ export const signInUser = ({
 }) => {
   return dispatch => {
     // sign in user here
+    return fbSignInUser(email, password).then(async response => {
+      await dispatch(
+        setUser(
+          {
+            email: response.user.email,
+            gender: 'gender',
+            dob: 'dob',
+            name: 'name'
+          },
+          false
+        )
+      );
+      return response;
+    });
 
-    dispatch(
-      setUser({ email, gender: 'gender', dob: 'dob', name: 'name' }, false)
-    );
     return true;
   };
 };
@@ -30,7 +56,9 @@ export const signUpUser = ({
   password
 }: IUserSignUp) => {
   return async dispatch => {
-    // regster user here
+    fbSignUpUser(email, password)
+      .then(value => console.log(value))
+      .catch(err => console.log(err));
 
     await dispatch(setUser({ email, gender, dob, name }, false));
   };

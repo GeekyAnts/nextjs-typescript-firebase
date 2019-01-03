@@ -1,5 +1,6 @@
 import React from 'react';
 import store from '../src/redux/store';
+import { fetchUser } from '../src/redux/actions';
 import App, { Container } from 'next/app';
 import { Provider } from 'react-redux';
 
@@ -12,6 +13,10 @@ export default class MyApp extends App {
     }
 
     return { pageProps };
+  }
+
+  componentDidMount() {
+    fetchUser()(store.dispatch);
   }
 
   render() {

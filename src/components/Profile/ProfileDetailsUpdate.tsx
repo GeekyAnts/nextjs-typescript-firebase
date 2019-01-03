@@ -20,7 +20,7 @@ class ProfileDetailsUpdate extends React.Component<
 
   handleSubmit = e => {
     e.preventDefault();
-    // console.log('updated user', this.state);
+
     this.props.updateUser(this.state);
   };
   render() {

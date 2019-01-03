@@ -5,8 +5,7 @@ import * as styles from '../styles/main.scss';
 import Head from 'next/head';
 import SignIn from '../src/components/Auth/SignIn';
 import Link from 'next/link';
-
-// import { connect } from 'react-redux';
+import CheckAuth from '../src/components/Auth/CheckAuth';
 
 class Signin extends React.Component<any, any> {
   render() {
@@ -18,6 +17,7 @@ class Signin extends React.Component<any, any> {
         <div
           className={[styles.container, styles['centered-container']].join(' ')}
         >
+          <CheckAuth />
           <SignIn />
         </div>
       </div>

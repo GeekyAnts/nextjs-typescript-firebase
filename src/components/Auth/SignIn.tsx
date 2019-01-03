@@ -4,32 +4,60 @@ import { signInUser } from '../../redux/actions';
 import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
 import { IUser } from '../../interfaces';
+import Router from 'next/router';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 class SignIn extends Component<
   {
     user: IUser;
     signInUser: (user: { email: string; password: string }) => Promise<string>;
+    fetchUser: () => Promise<string>;
   },
   {
     email: string;
     password: string;
+    error: string;
   }
 > {
   state = {
     email: '',
-    password: ''
+    password: '',
+    error: null
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    this.props.signInUser({ ...this.state });
+    this.props
+      .signInUser({ email: this.state.email, password: this.state.password })
+      .catch((err: { code: string; message: string }) => {
+        this.setState({ error: err.code });
+      })
+      .then(response => {
+        if (Router.router.query.current === '/')
+          response && Router.push('/dashboard');
+        else response && Router.push(Router.router.query.current);
+      });
   };
   render() {
     return (
       <div className="signin">
         <div className={styles.panel}>
+          <div
+            style={{
+              textAlign: 'center',
+              color: 'red',
+              marginBottom: '10px'
+            }}
+          >
+            {' '}
+            {this.state.error
+              ? this.state.error
+                  .split('/')[1]
+                  .split('-')
+                  .join(' ')
+              : ''}
+          </div>
           <form onSubmit={this.handleSubmit}>
             <div className={styles['form-group']}>
               <label htmlFor="emailInput"> Email Address</label>
@@ -53,6 +81,9 @@ class SignIn extends Component<
                 className={[styles['form-control']].join(' ')}
                 type="password"
                 name="password"
+                onChange={event =>
+                  this.setState({ password: event.target.value })
+                }
               />
             </div>
             <small>

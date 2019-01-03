@@ -1,8 +1,6 @@
 import { Reducer, AnyAction } from 'redux';
 
-const INITIAL_STATE = {
-  email: undefined
-};
+const INITIAL_STATE = null;
 
 interface Iuser {
   email: string;

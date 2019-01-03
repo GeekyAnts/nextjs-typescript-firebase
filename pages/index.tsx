@@ -1,31 +1,28 @@
 import store from '../src/redux/store';
 import { Provider } from 'react-redux';
 import React from 'react';
+import * as styles from '../styles/main.scss';
+import Head from 'next/head';
+import CheckAuth from '../src/components/Auth/CheckAuth';
 import Link from 'next/link';
 import Router from 'next/router';
-// import 'bootstrap';
+import { MoonLoader } from 'react-spinners';
+
 // import { connect } from 'react-redux';
 
-class App extends React.Component {
-  reduxState = store.getState();
-  componentDidMount() {
-    this.reduxState.user.email ? Router.push('/home') : Router.push('/signin');
-  }
+class Index extends React.Component<any, any> {
   render() {
     return (
       <div>
-        <Link href="/signin">
-          <a>Link to signin page</a>
-        </Link>
+        <div
+          className={[styles.container, styles['centered-container']].join(' ')}
+        >
+          <CheckAuth />
+          <MoonLoader sizeUnit={'px'} size={300} color={'#123abc'} />
+        </div>
       </div>
     );
   }
 }
 
-export default App;
-
-// const mapStateToProps = ({ user }) => {
-//   return { user };
-// };
-
-// export default connect(mapStateToProps)(App);
+export default Index;
