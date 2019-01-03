@@ -34,9 +34,13 @@ class SignIn extends Component<
         this.setState({ error: err.code });
       })
       .then(response => {
-        if (Router.router.query.current === '/')
+        if (!Router.router.query.current || Router.router.query.current === '/')
           response && Router.push('/dashboard');
-        else response && Router.push(Router.router.query.current);
+        else {
+          response &&
+            Router.router.query.current &&
+            Router.push(Router.router.query.current);
+        }
       });
   };
   render() {

@@ -8,4 +8,6 @@ export const fbSignUpUser = (email, password) =>
 export const fbSignInUser = (email, password) =>
   auth.signInAndRetrieveDataWithEmailAndPassword(email, password);
 
+export const fbSignOut = () => auth.signOut();
+
 export const fbCheckAuth = callback => auth.onAuthStateChanged(callback);

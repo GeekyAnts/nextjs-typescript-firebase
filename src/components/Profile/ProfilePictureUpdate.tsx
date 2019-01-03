@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import * as styles from '../../../styles/main.scss';
 import { connect } from 'react-redux';
+import { uploadProfilePicture } from '../../redux/actions';
 
-export class ProfilePictureUpdate extends Component<{ user }, any> {
+export class ProfilePictureUpdate extends Component<
+  { user; uploadProfilePicture: Function },
+  any
+> {
   state = {
-    selectedFile: null
+    selectedFile: null,
+    progress: null,
+    status: null
   };
 
   handleSelectedFile = event => {
@@ -15,6 +21,13 @@ export class ProfilePictureUpdate extends Component<{ user }, any> {
 
   handleUpload = () => {
     //upload the new profile picture
+    this.props.uploadProfilePicture(
+      this.state.selectedFile,
+      this.props.user.uid,
+      (progress, status) => {
+        this.setState({ progress, status });
+      }
+    );
   };
 
   render() {
@@ -28,16 +41,25 @@ export class ProfilePictureUpdate extends Component<{ user }, any> {
           <h3> Current Profile Picture </h3>
         </div>
         <div style={{ marginBottom: '50px' }}>
-          <img
-            src={
-              this.state.selectedFile
-                ? URL.createObjectURL(this.state.selectedFile)
-                : 'https://react.semantic-ui.com/images/wireframe/image.png'
-            }
-            // height="250px"
-            width="300px"
-          />
+          {this.state.progress ? (
+            <div> uploading {this.state.progress} %</div>
+          ) : (
+            <img
+              src={
+                this.props.user.photoURL ||
+                'https://react.semantic-ui.com/images/wireframe/image.png'
+              }
+              // height="250px"
+              width="300px"
+            />
+          )}
         </div>
+        <small>
+          {' '}
+          {this.state.status
+            ? 'Uploaded Successfully'
+            : this.state.status === false && 'Upload failed'}
+        </small>
         <div className={styles['form-group']}>
           {' '}
           <label htmlFor="profilePicTureInput">
@@ -56,6 +78,7 @@ export class ProfilePictureUpdate extends Component<{ user }, any> {
               styles['btn-primary'],
               styles['submit-button']
             ].join(' ')}
+            onClick={this.handleUpload}
             type="submit"
           >
             {' '}
@@ -71,4 +94,7 @@ const mapStateToProps = ({ user }) => {
   return { user };
 };
 
-export default connect(mapStateToProps)(ProfilePictureUpdate);
+export default connect(
+  mapStateToProps,
+  { uploadProfilePicture }
+)(ProfilePictureUpdate);

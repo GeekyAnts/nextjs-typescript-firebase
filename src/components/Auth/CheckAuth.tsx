@@ -17,7 +17,10 @@ class checkAuth extends React.Component<{
         });
     }
     if (auth === true) {
-      if (this.props.router && this.props.router.pathname === '/') {
+      if (
+        (this.props.router && this.props.router.pathname === '/') ||
+        this.props.router.pathname === '/signin'
+      ) {
         Router.push('/dashboard');
       }
     }

@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import * as styles from '../../../styles/main.scss';
+import { connect } from 'react-redux';
+import { signOutUser } from '../../redux/actions';
 
-class NavBar extends Component<{}, { dropdownOpen: boolean }> {
+class NavBar extends Component<
+  { signOutUser: () => void },
+  { dropdownOpen: boolean }
+> {
   constructor(props) {
     super(props);
     this.state = { dropdownOpen: false };
@@ -65,6 +70,12 @@ class NavBar extends Component<{}, { dropdownOpen: boolean }> {
               >
                 Update Profile Details
               </span>
+              <span
+                className={styles['dropdown-item']}
+                onClick={() => this.props.signOutUser()}
+              >
+                Sign Out
+              </span>
             </div>
           </div>
         </div>
@@ -73,4 +84,11 @@ class NavBar extends Component<{}, { dropdownOpen: boolean }> {
   }
 }
 
-export default NavBar;
+const mapStateToProps = ({ user, auth }) => {
+  return { user, auth };
+};
+
+export default connect(
+  mapStateToProps,
+  { signOutUser }
+)(NavBar);

@@ -69,9 +69,9 @@ class SignUp extends React.Component<
                 id="genderInput"
                 className={styles['form-control']}
                 name="gender"
-                onChange={event =>
-                  this.setState({ gender: event.target.value })
-                }
+                onChange={event => {
+                  this.setState({ gender: event.target.value });
+                }}
               >
                 <option> male </option>
                 <option> female </option>

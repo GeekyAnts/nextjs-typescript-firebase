@@ -11,7 +11,7 @@ class ProfileDetailsUpdate extends React.Component<
   state: IUser = {
     name: '',
     email: undefined,
-    gender: '',
+    gender: 'male',
     dob: ''
   };
   componentDidMount() {
@@ -21,7 +21,7 @@ class ProfileDetailsUpdate extends React.Component<
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.updateUser(this.state);
+    this.props.updateUser(this.props.user.uid, this.state);
   };
   render() {
     return (

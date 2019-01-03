@@ -1,10 +1,18 @@
 import { IUserSignUp, IUser } from '../../interfaces';
-import { fbSignInUser, fbSignUpUser, fbCheckAuth } from '../../firebase/auth';
-export const setUser = (user: IUser, error: any) => ({
+import {
+  fbSignInUser,
+  fbSignUpUser,
+  fbSignOut,
+  fbCheckAuth
+} from '../../firebase/auth';
+import firebase from '../../firebase';
+
+export const setUser = (user: IUser | { photoURL: string }, error: any) => ({
   type: 'SET_USER',
   payload: user,
   error
 });
+
 export const setAuth = (status: boolean, error: any) => ({
   type: 'SET_AUTH',
   payload: status,
@@ -14,9 +22,22 @@ export const setAuth = (status: boolean, error: any) => ({
 export const fetchUser = () => {
   return dispatch => {
     fbCheckAuth(user => {
-      user
-        ? (dispatch(setAuth(true, false)), dispatch(setUser(user, false)))
-        : dispatch(setAuth(false, false));
+      if (user) {
+        dispatch(setAuth(true, false));
+        var userId = user.uid;
+        return firebase
+          .database()
+          .ref('/user/' + userId)
+          .once('value')
+          .then(function(snapshot) {
+            dispatch(
+              setUser(
+                { ...snapshot.val(), uid: userId, photoURL: user.photoURL },
+                false
+              )
+            );
+          });
+      } else dispatch(setAuth(false, false));
     });
   };
 };
@@ -31,17 +52,6 @@ export const signInUser = ({
   return dispatch => {
     // sign in user here
     return fbSignInUser(email, password).then(async response => {
-      await dispatch(
-        setUser(
-          {
-            email: response.user.email,
-            gender: 'gender',
-            dob: 'dob',
-            name: 'name'
-          },
-          false
-        )
-      );
       return response;
     });
 
@@ -56,18 +66,80 @@ export const signUpUser = ({
   password
 }: IUserSignUp) => {
   return async dispatch => {
-    fbSignUpUser(email, password)
-      .then(value => console.log(value))
-      .catch(err => console.log(err));
-
-    await dispatch(setUser({ email, gender, dob, name }, false));
+    await fbSignUpUser(email, password)
+      .then(user => {
+        const ref = firebase
+          .database()
+          .ref()
+          .child('user');
+        ref.child(user.user.uid).set({ email, gender, dob, name });
+        //  dispatch(setUser({ email, gender, dob, name }, false));
+      })
+      .catch(err => {
+        //
+      });
   };
 };
-export const updateUser = (user: IUser) => {
+
+export const updateUser = (uid, { email, gender, dob, name }) => {
   return async dispatch => {
     // regster user here
+    const ref = firebase
+      .database()
+      .ref()
+      .child('user');
+    ref
+      .child(uid)
+      .set({ email, gender, dob, name })
+      .then(() => dispatch(setUser({ email, gender, dob, name }, false)));
 
-    await dispatch(setUser(user, false));
     return true;
+  };
+};
+
+export const uploadProfilePicture = (
+  file: File,
+  uid: string,
+  callback: (progress: number, status: boolean) => void
+) => dispatch => {
+  const storageRef = firebase
+    .storage()
+    .ref()
+    .child('profilePictures/' + uid);
+  const task = storageRef.put(file);
+  task.on(
+    'state_changed',
+    (snapshot: {
+      bytesTransferred: number;
+      totalBytes: number;
+      state: string;
+    }) => {
+      const percentage =
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      callback(percentage, false);
+    },
+    error => {
+      callback(-1, false);
+    },
+    () => {
+      callback(null, true);
+      task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        dispatch(setUser({ photoURL: downloadURL }, false));
+        const user = firebase.auth().currentUser;
+        user.updateProfile({
+          photoURL: downloadURL,
+          displayName: null
+        });
+      });
+    }
+  );
+};
+
+export const signOutUser = () => {
+  return async dispatch => {
+    await fbSignOut().then(() => {
+      dispatch(setUser(null, false));
+      dispatch(setAuth(false, false));
+    });
   };
 };
