@@ -5,7 +5,13 @@ import { updateUser } from '../../redux/actions';
 import { IUser } from '../../interfaces';
 
 class ProfileDetailsUpdate extends React.Component<
-  { user; updateUser: Function },
+  {
+    user;
+    updateUser: (
+      uid: number,
+      user: { email: string; dob: string; gender: string; name: string }
+    ) => void;
+  },
   IUser
 > {
   state: IUser = {

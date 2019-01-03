@@ -42,11 +42,11 @@ export class ProfilePictureUpdate extends Component<
         </div>
         <div style={{ marginBottom: '50px' }}>
           {this.state.progress ? (
-            <div> uploading {this.state.progress} %</div>
+            <div> uploading {Math.floor(this.state.progress)} %</div>
           ) : (
             <img
               src={
-                this.props.user.photoURL ||
+                (this.props.user && this.props.user.photoURL) ||
                 'https://react.semantic-ui.com/images/wireframe/image.png'
               }
               // height="250px"

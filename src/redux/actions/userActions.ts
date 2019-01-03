@@ -81,7 +81,15 @@ export const signUpUser = ({
   };
 };
 
-export const updateUser = (uid, { email, gender, dob, name }) => {
+export const updateUser = (
+  uid: string,
+  {
+    email,
+    gender,
+    dob,
+    name
+  }: { email: string; gender: string; dob: string; name: string }
+) => {
   return async dispatch => {
     // regster user here
     const ref = firebase
@@ -116,7 +124,7 @@ export const uploadProfilePicture = (
     }) => {
       const percentage =
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      callback(percentage, false);
+      callback(percentage, null);
     },
     error => {
       callback(-1, false);

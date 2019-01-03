@@ -6,7 +6,7 @@ import { fetchUser } from '../../redux/actions';
 class checkAuth extends React.Component<{
   auth: boolean;
   router: { pathname: string };
-  fetchUser: Function;
+  fetchUser: () => void;
 }> {
   route = auth => {
     if (auth === false) {
