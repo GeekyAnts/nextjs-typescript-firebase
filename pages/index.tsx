@@ -5,12 +5,14 @@ import { MoonLoader } from 'react-spinners';
 
 class Index extends React.Component<any, any> {
   render() {
+    // const { Component, pageProps } = this.props;
     return (
       <div>
         <div
           className={[styles.container, styles['centered-container']].join(' ')}
         >
           <CheckAuth />
+
           <MoonLoader sizeUnit={'px'} size={300} color={'#123abc'} />
         </div>
       </div>

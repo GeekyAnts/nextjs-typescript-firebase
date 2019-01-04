@@ -51,7 +51,7 @@ class SignIn extends Component<
   render() {
     let facts = {};
     if (typeof window !== 'undefined') {
-      facts = window.__NEXT_DATA__.props.facts;
+      facts = window.__NEXT_DATA__.props.pageProps.facts;
     }
 
     return (
@@ -159,7 +159,8 @@ class SignIn extends Component<
             : ''}
         </div>
         <div className={[styles.row].join(' ')}>
-          {facts.all &&
+          {facts &&
+            facts.all &&
             facts.all.map(item => (
               <div
                 key={item._id}

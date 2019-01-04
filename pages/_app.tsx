@@ -11,13 +11,8 @@ export default class MyApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-    let facts = {};
-    await fetch('https://cat-fact.herokuapp.com/facts')
-      .then(response => response.json())
-      .then(response => {
-        facts = response;
-      });
-    return { pageProps, facts };
+
+    return { pageProps };
   }
 
   componentDidMount() {
