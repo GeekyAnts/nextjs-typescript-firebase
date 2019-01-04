@@ -77,8 +77,10 @@ class SignIn extends Component<
               className={[
                 styles['form-group'],
                 styles['sm-5'],
+                styles['no-bottom-margin'],
                 styles['mr-1']
               ].join(' ')}
+              style={{ color: 'whitesmoke' }}
             >
               <label htmlFor="emailInput"> Email Address</label>
               <input
@@ -88,6 +90,13 @@ class SignIn extends Component<
                 name="email"
                 onChange={event => this.setState({ email: event.target.value })}
               />
+              <small>
+                {' '}
+                Not a user ? register{' '}
+                <Link href="/signup">
+                  <a>here</a>
+                </Link>{' '}
+              </small>
             </div>
             <div
               className={[
@@ -96,6 +105,7 @@ class SignIn extends Component<
                 styles['sm-5'],
                 styles['mr-1']
               ].join(' ')}
+              style={{ color: 'whitesmoke' }}
             >
               <label htmlFor="passwordInput"> Password</label>
               <input
@@ -107,17 +117,18 @@ class SignIn extends Component<
                   this.setState({ password: event.target.value })
                 }
               />
+              <small>
+                Forgot your password , click{' '}
+                <Link href="/forgot-password">
+                  <a> here</a>
+                </Link>
+              </small>
             </div>
-            {/* <small>
-            Forgot your password , click{' '}
-            <Link href="/forgot-password">
-              <a> here</a>
-            </Link>
-          </small> */}
+
             <div className={[styles['mr-sm-2']].join(' ')}>
               {this.state.signingIn ? (
                 <div className={styles['submit-button']}>
-                  <MoonLoader sizeUnit={'px'} size={30} color={'white'} />{' '}
+                  <MoonLoader sizeUnit={'px'} size={30} color={'whitesmoke'} />{' '}
                 </div>
               ) : (
                 <button
@@ -134,18 +145,24 @@ class SignIn extends Component<
                 </button>
               )}
             </div>
-            {/* <small className={styles['center-text']}> not a user ,
-          register{' '}
-          <Link href="/signup">
-            <a>here</a>
-          </Link>{' '}
-           </small> */}
           </form>
         </nav>
+        <div
+          className={styles['centered-text']}
+          style={{ margin: 'auto', width: 'fit-content', color: 'red' }}
+        >
+          {this.state.error
+            ? this.state.error
+                .split('/')[1]
+                .split('-')
+                .join(' ')
+            : ''}
+        </div>
         <div className={[styles.row].join(' ')}>
           {facts.all &&
             facts.all.map(item => (
               <div
+                key={item._id}
                 className={[
                   styles.card,
                   styles['col-sm-3'],
@@ -167,7 +184,10 @@ class SignIn extends Component<
                   >
                     {item.user && item.user.name.last}
                   </h6>
-                  <p className={styles['card-text']}> {item.text}</p>
+                  <p className={styles['card-text']}>
+                    {' '}
+                    {item.text.substr(0, 100)}
+                  </p>
                 </div>
               </div>
             ))}

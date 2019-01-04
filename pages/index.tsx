@@ -1,5 +1,5 @@
 import React from 'react';
-import * as styles from '../styles/main';
+import * as styles from '../styles/main.scss';
 import CheckAuth from '../src/components/Auth/CheckAuth';
 import { MoonLoader } from 'react-spinners';
 
