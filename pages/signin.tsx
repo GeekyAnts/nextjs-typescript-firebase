@@ -12,7 +12,7 @@ class Signin extends React.Component<any, any> {
           <title>Sign In</title>
         </Head>
         <div
-          className={[styles.container, styles['centered-container']].join(' ')}
+        // className={[styles.container, styles['centered-container']].join(' ')}
         >
           <CheckAuth />
           <SignIn />

@@ -49,26 +49,37 @@ class SignIn extends Component<
       });
   };
   render() {
+    let facts = {};
+    if (typeof window !== 'undefined') {
+      facts = window.__NEXT_DATA__.props.facts;
+    }
+
     return (
-      <div className="signin">
-        <div className={styles.panel}>
-          <div
-            style={{
-              textAlign: 'center',
-              color: 'red',
-              marginBottom: '10px'
-            }}
+      <div>
+        <nav
+          className={[
+            styles.navbar,
+            styles['navbar-dark'],
+            styles['bg-dark']
+          ].join(' ')}
+        >
+          <span className="navbar-brand">
+            <Link href="/dashboard">
+              <a>Dashboard</a>
+            </Link>
+          </span>
+          <form
+            // className={[styles['form-inline']].join(' ')}
+            className={[styles['row']].join(' ')}
+            onSubmit={this.handleSubmit}
           >
-            {' '}
-            {this.state.error
-              ? this.state.error
-                  .split('/')[1]
-                  .split('-')
-                  .join(' ')
-              : ''}
-          </div>
-          <form onSubmit={this.handleSubmit}>
-            <div className={styles['form-group']}>
+            <div
+              className={[
+                styles['form-group'],
+                styles['sm-5'],
+                styles['mr-1']
+              ].join(' ')}
+            >
               <label htmlFor="emailInput"> Email Address</label>
               <input
                 className={styles['form-control']}
@@ -81,7 +92,9 @@ class SignIn extends Component<
             <div
               className={[
                 styles['form-group'],
-                styles['no-bottom-margin']
+                styles['no-bottom-margin'],
+                styles['sm-5'],
+                styles['mr-1']
               ].join(' ')}
             >
               <label htmlFor="passwordInput"> Password</label>
@@ -95,40 +108,93 @@ class SignIn extends Component<
                 }
               />
             </div>
-            <small>
-              Forgot your password , click{' '}
-              <Link href="/forgot-password">
-                <a> here</a>
-              </Link>
-            </small>
-            {this.state.signingIn ? (
-              <div className={styles['submit-button']}>
-                <MoonLoader sizeUnit={'px'} size={30} color={'#123abc'} />{' '}
-              </div>
-            ) : (
-              <button
-                disabled={this.state.signingIn}
-                className={[
-                  styles.btn,
-                  styles['btn-primary'],
-                  styles['submit-button']
-                ].join(' ')}
-                type="submit"
-              >
-                Submit
-              </button>
-            )}
-            <small className={styles['center-text']}>
-              {' '}
-              not a user , register{' '}
-              <Link href="/signup">
-                <a>here</a>
-              </Link>{' '}
-            </small>
+            {/* <small>
+            Forgot your password , click{' '}
+            <Link href="/forgot-password">
+              <a> here</a>
+            </Link>
+          </small> */}
+            <div className={[styles['mr-sm-2']].join(' ')}>
+              {this.state.signingIn ? (
+                <div className={styles['submit-button']}>
+                  <MoonLoader sizeUnit={'px'} size={30} color={'white'} />{' '}
+                </div>
+              ) : (
+                <button
+                  disabled={this.state.signingIn}
+                  className={[
+                    styles.btn,
+                    styles['btn-primary'],
+                    styles['submit-button']
+                  ].join(' ')}
+                  type="submit"
+                  style={{ marginTop: '40%' }}
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+            {/* <small className={styles['center-text']}> not a user ,
+          register{' '}
+          <Link href="/signup">
+            <a>here</a>
+          </Link>{' '}
+           </small> */}
           </form>
+        </nav>
+        <div className={[styles.row].join(' ')}>
+          {facts.all &&
+            facts.all.map(item => (
+              <div
+                className={[
+                  styles.card,
+                  styles['col-sm-3'],
+
+                  styles['ml-sm-5'],
+                  styles['mt-sm-4']
+                ].join(' ')}
+              >
+                <div className={styles['card-body']}>
+                  <h5 className={styles['card-title']}>
+                    {item.user && item.user.name.first}
+                  </h5>
+                  <h6
+                    className={[
+                      styles['card-subtitle'],
+                      styles['mb-2'],
+                      styles['text-muted']
+                    ].join(' ')}
+                  >
+                    {item.user && item.user.name.last}
+                  </h6>
+                  <p className={styles['card-text']}> {item.text}</p>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     );
+    //       <div className="signin">
+    //         <div className={styles.panel}>
+    //           <div
+    //             style={{
+    //               textAlign: 'center',
+    //               color: 'red',
+    //               marginBottom: '10px'
+    //             }}
+    //           >
+    //             {' '}
+    //             {this.state.error
+    //               ? this.state.error
+    //                   .split('/')[1]
+    //                   .split('-')
+    //                   .join(' ')
+    //               : ''}
+    //           </div>
+
+    //         </div>
+    //       </div>
+    //     );
   }
 }
 
