@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { signUpUser } from '../../redux/actions';
+import { fbUpdatePassword } from '../../firebase/auth';
 import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
 import Router from 'next/router';
@@ -9,21 +9,36 @@ class ResetPassword extends Component {
   state = {
     currentPassword: null,
     newPassword: null,
-    confirmPassword: null
+    confirmPassword: null,
+    error: null
   };
 
   handleSubmit = event => {
     event.preventDefault();
     //checkPassword then
-    if (this.state.newPassword === this.state.currentPassword) {
+    if (this.state.newPassword === this.state.confirmPassword) {
       //this.props.resetPassword(this.state.newPassword) ;}
-      Router.push('/signin');
+      fbUpdatePassword(
+        this.state.currentPassword,
+        this.state.newPassword
+      ).catch(err => {
+        switch (err.code) {
+          case 'auth/wrong-password': {
+            this.setState({ error: 'wrong password' });
+            break;
+          }
+          default:
+            this.setState(err.message);
+        }
+      });
+      Router.push('/dashboard');
     }
   };
   render() {
     return (
       <div className="sign-up">
         <div className={styles.panel}>
+          <div>{this.state.error || ''}</div>
           <form onSubmit={this.handleSubmit}>
             <div className={styles['form-group']}>
               <label htmlFor="currenPasswordInput">

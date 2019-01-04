@@ -5,6 +5,7 @@ import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
 import Router from 'next/router';
 import { IUserSignUp } from '../../interfaces';
+import { MoonLoader } from 'react-spinners';
 
 class SignUp extends React.Component<
   {
@@ -14,34 +15,49 @@ class SignUp extends React.Component<
   any
 > {
   state = {
-    email: '',
-    password: '',
-    confirmPassword: '',
-    gender: '',
-    dob: '',
-    name: ''
+    user: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      gender: '',
+      dob: '',
+      name: ''
+    },
+    error: null,
+    signingUp: false
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    this.state.confirmPassword === this.state.password &&
-      this.props.signUpUser({ ...this.state }).then(() => {
-        Router.push('/dashboard');
-      });
+    if (this.state.user.confirmPassword === this.state.user.password) {
+      this.setState({ signingUp: true });
+      this.props
+        .signUpUser({ ...this.state.user })
+        .then(() => {
+          this.setState({ signingUp: false });
+          Router.push('/dashboard');
+        })
+        .catch(err => {
+          this.setState({ signingUp: false });
+          this.setState({ error: err.message });
+        });
+    }
   };
   render() {
     var passMatch: boolean = false;
 
     if (
-      !this.state.confirmPassword ||
-      this.state.password === this.state.confirmPassword
+      !this.state.user.confirmPassword ||
+      this.state.user.password === this.state.user.confirmPassword
     ) {
       passMatch = true;
     }
+
     return (
       <div className="sign-up">
         <div className={styles.panel}>
+          <div style={{ color: 'red' }}>{this.state.error || ''}</div>
           <form onSubmit={this.handleSubmit}>
             <div className={styles['form-group']}>
               <label htmlFor="nameInput"> Name</label>
@@ -50,7 +66,11 @@ class SignUp extends React.Component<
                 className={styles['form-control']}
                 type="text"
                 name="name"
-                onChange={event => this.setState({ name: event.target.value })}
+                onChange={event =>
+                  this.setState({
+                    user: { ...this.state.user, name: event.target.value }
+                  })
+                }
               />
             </div>
             <div className={styles['form-group']}>
@@ -60,7 +80,11 @@ class SignUp extends React.Component<
                 className={styles['form-control']}
                 type="date"
                 name="dob"
-                onChange={event => this.setState({ dob: event.target.value })}
+                onChange={event =>
+                  this.setState({
+                    user: { ...this.state.user, dob: event.target.value }
+                  })
+                }
               />
             </div>
             <div className={styles['form-group']}>
@@ -70,7 +94,9 @@ class SignUp extends React.Component<
                 className={styles['form-control']}
                 name="gender"
                 onChange={event => {
-                  this.setState({ gender: event.target.value });
+                  this.setState({
+                    user: { ...this.state.user, gender: event.target.value }
+                  });
                 }}
               >
                 <option> male </option>
@@ -85,7 +111,11 @@ class SignUp extends React.Component<
                 className={styles['form-control']}
                 type="email"
                 name="email"
-                onChange={event => this.setState({ email: event.target.value })}
+                onChange={event =>
+                  this.setState({
+                    user: { ...this.state.user, email: event.target.value }
+                  })
+                }
               />
             </div>
             <div className={styles['form-group']}>
@@ -96,7 +126,9 @@ class SignUp extends React.Component<
                 type="password"
                 name="password"
                 onChange={event =>
-                  this.setState({ password: event.target.value })
+                  this.setState({
+                    user: { ...this.state.user, password: event.target.value }
+                  })
                 }
               />
             </div>
@@ -112,22 +144,33 @@ class SignUp extends React.Component<
                 type="password"
                 name="confirmPassword"
                 onChange={event =>
-                  this.setState({ confirmPassword: event.target.value })
+                  this.setState({
+                    user: {
+                      ...this.state.user,
+                      confirmPassword: event.target.value
+                    }
+                  })
                 }
               />
               <small> {!passMatch && ' passwords dont match'}</small>
             </div>
-            <button
-              className={[
-                styles['btn-primary'],
-                styles.btn,
-                styles['submit-button']
-              ].join(' ')}
-              type="submit"
-            >
-              {' '}
-              Submit{' '}
-            </button>
+            {this.state.signingUp ? (
+              <div className={styles['submit-button']}>
+                <MoonLoader sizeUnit={'px'} size={30} color={'#123abc'} />{' '}
+              </div>
+            ) : (
+              <button
+                className={[
+                  styles['btn-primary'],
+                  styles.btn,
+                  styles['submit-button']
+                ].join(' ')}
+                type="submit"
+              >
+                {' '}
+                Submit{' '}
+              </button>
+            )}
             <small className={styles['center-text']}>
               {' '}
               Already a user , login{' '}
