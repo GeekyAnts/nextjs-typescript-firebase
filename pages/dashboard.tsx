@@ -1,7 +1,4 @@
-import store from '../src/redux/store';
-import { Provider } from 'react-redux';
 import React from 'react';
-import Link from 'next/link';
 import NavBar from '../src/components/Navigation/NavBar';
 import CheckAuth from '../src/components/Auth/CheckAuth';
 

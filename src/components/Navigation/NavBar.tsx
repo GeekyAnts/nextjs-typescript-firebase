@@ -60,13 +60,13 @@ class NavBar extends Component<
             >
               <span
                 className={styles['dropdown-item']}
-                onClick={() => Router.push('/profile/profile-picture-update')}
+                onClick={() => Router.push('/profile/picture-update')}
               >
                 Change Profile Picture
               </span>
               <span
                 className={styles['dropdown-item']}
-                onClick={() => Router.push('/profile/profile-details-update')}
+                onClick={() => Router.push('/profile/details-update')}
               >
                 Update Profile Details
               </span>

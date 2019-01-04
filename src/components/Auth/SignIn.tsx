@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signInUser } from '../../redux/actions';
-import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
-import { IUser } from '../../interfaces';
 import Router from 'next/router';
 import { MoonLoader } from 'react-spinners';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { IUser } from '../../interfaces';
+import { signInUser } from '../../redux/actions';
+import * as styles from '../../../styles/main.scss';
 
 class SignIn extends Component<
   {
