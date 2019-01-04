@@ -20,8 +20,12 @@ class ProfileDetailsUpdate extends React.Component<
     gender: 'male',
     dob: ''
   };
-  componentDidMount() {
-    this.setState(this.props.user);
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.user && nextProps.user.email !== prevState.email) {
+      return { ...nextProps.user };
+    }
+    return null;
   }
 
   handleSubmit = e => {
