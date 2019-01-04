@@ -10,13 +10,16 @@ export default class extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
-        <div
-          className={[styles.container, styles['centered-container']].join(' ')}
-        >
-          <CheckAuth />
-          <ProfileDetailsUpdate />
-        </div>
+        <CheckAuth>
+          <NavBar />
+          <div
+            className={[styles.container, styles['centered-container']].join(
+              ' '
+            )}
+          >
+            <ProfileDetailsUpdate />
+          </div>
+        </CheckAuth>
       </div>
     );
   }

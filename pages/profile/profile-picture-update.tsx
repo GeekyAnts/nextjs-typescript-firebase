@@ -9,9 +9,10 @@ export default class extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
-        <CheckAuth />
-        <ProfilePictureUpdate />
+        <CheckAuth>
+          <NavBar />
+          <ProfilePictureUpdate />
+        </CheckAuth>
       </div>
     );
   }
