@@ -3,7 +3,8 @@ import {
   fbSignInUser,
   fbSignUpUser,
   fbSignOut,
-  fbCheckAuth
+  fbCheckAuth,
+  fbReauthenticateUser
 } from '../../firebase/auth';
 import firebase from '../../firebase';
 
@@ -65,20 +66,18 @@ export const signUpUser = ({
   name,
   password
 }: IUserSignUp) => {
-  return async dispatch => {
-    await fbSignUpUser(email, password)
-      .then(user => {
-        const ref = firebase
-          .database()
-          .ref()
-          .child('user');
-        ref.child(user.user.uid).set({ email, gender, dob, name });
-        //  dispatch(setUser({ email, gender, dob, name }, false));
-      })
-      .catch(err => {
-        //
-      });
-  };
+  return async dispatch =>
+    fbSignUpUser(email, password).then(user => {
+      const ref = firebase
+        .database()
+        .ref()
+        .child('user');
+      ref.child(user.user.uid).set({ email, gender, dob, name });
+      //  dispatch(setUser({ email, gender, dob, name }, false));
+    });
+  // .catch(err => {
+  //   //
+  // });
 };
 
 export const updateUser = (

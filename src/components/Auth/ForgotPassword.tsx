@@ -4,142 +4,48 @@ import { Component, FormEvent } from 'react';
 import * as styles from '../../../styles/main.scss';
 // import Link from 'next/link';
 import Router from 'next/router';
+import firebase from '../../firebase/index';
 
 class ForgotPassword extends Component<any, any> {
   state = {
     email: null,
-    otp: null,
-    newPassword: null,
-    confirmPassword: null,
-    emailConfirmed: false,
-    otpConfirmed: false
+    status: null
   };
 
   handleEmailSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    firebase
+      .auth()
+      .sendPasswordResetEmail(this.state.email)
+      .then(() =>
+        this.setState({
+          status:
+            'email has been sent , please follow the link to reset your password'
+        })
+      )
+      .catch(err => this.setState({ status: err.message }));
 
     //confirm if email exists
     //then
-    this.setState({ emailConfirmed: true });
-  };
-
-  handleOtpSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    //confirm if otp is valid
-    //then
-    this.setState({ otpConfirmed: true });
-  };
-
-  handlePasswordSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (this.state.newPassword === this.state.confirmPassword) {
-      Router.push('/');
-    }
+    // this.setState({ emailConfirmed: true });
   };
 
   forgotPasswordForm = () => {
-    if (!this.state.emailConfirmed) {
-      return (
-        <form onSubmit={this.handleEmailSubmit}>
-          <div className={styles['form-group']}>
-            <label htmlFor="emailInput">
-              {' '}
-              Please enter your registered email address
-            </label>
-            <input
-              id="emailInput"
-              className={styles['form-control']}
-              type="email"
-              name="email"
-              onChange={event => this.setState({ email: event.target.value })}
-            />
-          </div>
-          <button
-            className={[
-              styles['btn-primary'],
-              styles.btn,
-              styles['submit-button']
-            ].join(' ')}
-            type="submit"
-            style={{ marginTop: 0 }}
-          >
-            {' '}
-            Submit{' '}
-          </button>
-        </form>
-      );
-    }
-    if (!this.state.otpConfirmed) {
-      return (
-        <form onSubmit={this.handleOtpSubmit}>
-          <div className={styles['form-group']}>
-            <label htmlFor="otpInput">
-              {' '}
-              Please enter the One Time Password you have recieved on your email
-            </label>
-            <input
-              id="otpInput"
-              className={styles['form-control']}
-              type="text"
-              name="otp"
-              onChange={event => this.setState({ otp: event.target.value })}
-            />
-          </div>
-          <button
-            className={[
-              styles['btn-primary'],
-              styles.btn,
-              styles['submit-button']
-            ].join(' ')}
-            type="submit"
-            style={{ marginTop: 0 }}
-          >
-            {' '}
-            Submit{' '}
-          </button>
-        </form>
-      );
-    }
     return (
-      <form onSubmit={this.handlePasswordSubmit}>
+      <form onSubmit={this.handleEmailSubmit}>
         <div className={styles['form-group']}>
-          <label htmlFor="newPasswordInput">
+          <label htmlFor="emailInput">
             {' '}
-            Please enter your new password
+            Please enter your registered email address
           </label>
           <input
-            id="newPasswordInput"
+            id="emailInput"
             className={styles['form-control']}
-            type="password"
-            name="newPassword"
-            onChange={event =>
-              this.setState({ newPassword: event.target.value })
-            }
+            type="email"
+            name="email"
+            onChange={event => this.setState({ email: event.target.value })}
           />
-        </div>
-        <div className={styles['form-group']}>
-          <label htmlFor="confirmPasswordInput"> Confirm Your password</label>
-          <input
-            id="confirmPasswordInput"
-            className={
-              this.state.confirmPassword &&
-              this.state.newPassword !== this.state.confirmPassword
-                ? [styles['form-control'], styles['is-invalid']].join(' ')
-                : styles['form-control']
-            }
-            type="password"
-            name="newPassword"
-            onChange={event =>
-              this.setState({ confirmPassword: event.target.value })
-            }
-          />
-          {this.state.confirmPassword &&
-          this.state.newPassword !== this.state.confirmPassword ? (
-            <small style={{ color: 'red' }}> Passwords doesn't match</small>
-          ) : (
-            true
-          )}
+          <small> {this.state.status}</small>
         </div>
         <button
           className={[
@@ -156,6 +62,7 @@ class ForgotPassword extends Component<any, any> {
       </form>
     );
   };
+
   render() {
     return (
       <div className="forgot-password">

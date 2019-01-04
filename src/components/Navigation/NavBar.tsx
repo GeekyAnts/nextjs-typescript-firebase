@@ -72,6 +72,12 @@ class NavBar extends Component<
               </span>
               <span
                 className={styles['dropdown-item']}
+                onClick={() => Router.push('/reset-password')}
+              >
+                Change Password
+              </span>
+              <span
+                className={styles['dropdown-item']}
                 onClick={() => this.props.signOutUser()}
               >
                 Sign Out

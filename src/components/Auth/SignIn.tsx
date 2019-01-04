@@ -5,6 +5,7 @@ import * as styles from '../../../styles/main.scss';
 import Link from 'next/link';
 import { IUser } from '../../interfaces';
 import Router from 'next/router';
+import { MoonLoader } from 'react-spinners';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 class SignIn extends Component<
@@ -17,23 +18,27 @@ class SignIn extends Component<
     email: string;
     password: string;
     error: string;
+    signingIn: boolean;
   }
 > {
   state = {
     email: '',
     password: '',
-    error: null
+    error: null,
+    signingIn: false
   };
 
   handleSubmit = event => {
     event.preventDefault();
-
+    this.setState({ signingIn: true });
     this.props
       .signInUser({ email: this.state.email, password: this.state.password })
       .catch((err: { code: string; message: string }) => {
+        this.setState({ signingIn: false });
         this.setState({ error: err.code });
       })
       .then(response => {
+        this.setState({ signingIn: false });
         if (!Router.router.query.current || Router.router.query.current === '/')
           response && Router.push('/dashboard');
         else {
@@ -96,17 +101,23 @@ class SignIn extends Component<
                 <a> here</a>
               </Link>
             </small>
-            <button
-              className={[
-                styles.btn,
-                styles['btn-primary'],
-                styles['submit-button']
-              ].join(' ')}
-              type="submit"
-            >
-              {' '}
-              Submit{' '}
-            </button>
+            {this.state.signingIn ? (
+              <div className={styles['submit-button']}>
+                <MoonLoader sizeUnit={'px'} size={30} color={'#123abc'} />{' '}
+              </div>
+            ) : (
+              <button
+                disabled={this.state.signingIn}
+                className={[
+                  styles.btn,
+                  styles['btn-primary'],
+                  styles['submit-button']
+                ].join(' ')}
+                type="submit"
+              >
+                Submit
+              </button>
+            )}
             <small className={styles['center-text']}>
               {' '}
               not a user , register{' '}
