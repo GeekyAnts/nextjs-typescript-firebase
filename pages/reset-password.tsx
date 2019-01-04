@@ -11,13 +11,16 @@ export default class extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
-        <div
-          className={[styles.container, styles['centered-container']].join(' ')}
-        >
-          <CheckAuth />
-          <ResetPassword />
-        </div>
+        <CheckAuth>
+          <NavBar />
+          <div
+            className={[styles.container, styles['centered-container']].join(
+              ' '
+            )}
+          >
+            <ResetPassword />
+          </div>
+        </CheckAuth>
       </div>
     );
   }
