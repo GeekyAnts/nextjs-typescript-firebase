@@ -30,7 +30,7 @@ class checkAuth extends React.Component<{
     (typeof this.props.auth !== 'undefined' || this.props.auth !== null) &&
       this.route(this.props.auth);
 
-    return null;
+    return (this.props.auth && this.props.children) || null;
   }
 }
 
