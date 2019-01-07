@@ -6,7 +6,6 @@ import CheckAuth from '../src/components/Auth/CheckAuth';
 
 class Signin extends React.Component<any, any> {
   static async getInitialProps(context) {
-    console.log('in signin');
     let facts = {};
     await fetch('https://cat-fact.herokuapp.com/facts', {
       // mode: 'no-cors'
@@ -21,7 +20,6 @@ class Signin extends React.Component<any, any> {
     return { facts };
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <Head>
