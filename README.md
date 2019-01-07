@@ -2,7 +2,7 @@
 
 A boilerplate for [Next.js](https://nextjs.org/) App.
 
-- This boilerplate is built using [Next.js] Server Side Rendering(SSR), and have used [Typescript Lang](https://www.typescriptlang.org/) for writing the app's logic.
+- This boilerplate is built using [Next.js](https://nextjs.org/) Server Side Rendering(SSR), and have used [Typescript Lang](https://www.typescriptlang.org/) for writing the app's logic.
 - It uses the [Redux state management](https://redux.js.org/), this helps us to have a global and presistent store all along our application .
 - For Authentication , Database and Storage, this repo contains the use of [Firebase](https://firebase.google.com/) (ie. [Firebase Authentication](https://firebase.google.com/products/auth/) , [Firebase Realtime Database](https://firebase.google.com/products/realtime-database/) and [Cloud Storage for Firebase](https://firebase.google.com/products/storage/) ).
 - For styling we are using [SASS lang](https://sass-lang.com/) and [Bootstrap Libraries](https://getbootstrap.com/)
@@ -108,18 +108,18 @@ npm run dev;
 
 ### Adding a page
 
-- to add a new page , create a new file named `<your-page-name>.tsx`
-- you can further import your own React Components and use it under `render` fnction
+- To add a new page , create a new file named `<your-page-name>.tsx`
+- You can further import your own React Components and use it under `render` fnction
 
 ### Setting Up Firebase
 
-- create a new project in [Firebase Console](https://console.firebase.google.com/) ,
+- Create a new project in [Firebase Console](https://console.firebase.google.com/) ,
   if you haven't already
-- enable `Authentication (Password Based)` , `Database` and `Storage` on your project
+- Enable `Authentication (Password Based)` , `Database` and `Storage` on your project
 - copy and paste your api credentials in `firebaseConfig.json`
 - To add a table of your own go to your Firebase project -> database -> create database , again ,
   if you haven't already
-- use the following code under your project to update/create a table
+- Use the following code under your project to update/create a table
 
 ```tsx
 import firebase from 'src/firebase';
@@ -130,7 +130,7 @@ const ref = firebase
 ref.child('unique-name-for--the-entry').set(/* table fields*/);
 ```
 
-- to get the data from firebase table use
+- To get the data from firebase table use
 
 ```tsx
 var Id = id; //unique-name-for--the-entry
