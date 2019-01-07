@@ -50,6 +50,9 @@ A boilerplate for [Next.js](https://nextjs.org/) App.
 │   │       └── ProfilePictueUpdate.tsx
 │   ├── firebase
 │   │   ├── auth.ts
+│   │   └── userInterfaces.ts
+│   ├── interfaces
+│   │   ├── auth.ts
 │   │   └── index.ts
 │   ├── redux
 │   │   ├── actions

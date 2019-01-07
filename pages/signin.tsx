@@ -7,6 +7,8 @@ import CheckAuth from '../src/components/Auth/CheckAuth';
 class Signin extends React.Component<any, any> {
   static async getInitialProps(context) {
     let facts = {};
+    //populate your PRE FETCHED data here ,
+    //adjust src/components/Auth/Signin.tsx render() function accordingly
     await fetch('https://cat-fact.herokuapp.com/facts', {
       // mode: 'no-cors'
     })
@@ -25,9 +27,7 @@ class Signin extends React.Component<any, any> {
         <Head>
           <title>Sign In</title>
         </Head>
-        <div
-        // className={[styles.container, styles['centered-container']].join(' ')}
-        >
+        <div>
           <CheckAuth />
           <SignIn {...this.props} />
         </div>
