@@ -5,12 +5,11 @@ import SignIn from '../src/components/Auth/SignIn';
 import CheckAuth from '../src/components/Auth/CheckAuth';
 
 class Signin extends React.Component<any, any> {
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {};
-
+  static async getInitialProps(context) {
+    console.log('in signin');
     let facts = {};
     await fetch('https://cat-fact.herokuapp.com/facts', {
-      mode: 'no-cors'
+      // mode: 'no-cors'
     })
       .then(response => response.json())
       .then(response => {
@@ -19,9 +18,10 @@ class Signin extends React.Component<any, any> {
       .catch(err => {
         //
       });
-    return { ...pageProps, facts };
+    return { facts };
   }
   render() {
+    console.log(this.props);
     return (
       <div>
         <Head>
@@ -31,7 +31,7 @@ class Signin extends React.Component<any, any> {
         // className={[styles.container, styles['centered-container']].join(' ')}
         >
           <CheckAuth />
-          <SignIn />
+          <SignIn {...this.props} />
         </div>
       </div>
     );

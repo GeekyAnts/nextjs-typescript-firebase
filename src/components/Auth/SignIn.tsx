@@ -11,6 +11,13 @@ import * as styles from '../../../styles/main.scss';
 class SignIn extends Component<
   {
     user: IUser;
+    facts: {
+      all: {
+        _id: string;
+        text: string;
+        user: { name: { first: string; last: string } };
+      }[];
+    };
     signInUser: (user: { email: string; password: string }) => Promise<string>;
     fetchUser: () => Promise<string>;
   },
@@ -44,15 +51,12 @@ class SignIn extends Component<
         else {
           response &&
             Router.router.query.current &&
-            Router.push(Router.router.query.current);
+            Router.push(`${Router.router.query.current}`);
         }
       });
   };
   render() {
-    let facts = {};
-    if (typeof window !== 'undefined') {
-      facts = window.__NEXT_DATA__.props.pageProps.facts;
-    }
+    const { facts } = this.props;
 
     return (
       <div>
