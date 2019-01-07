@@ -104,6 +104,52 @@ vim firebaseConfig.json;
 npm run dev;
 ```
 
+# Further Steps
+
+### Adding a page
+
+- to add a new page , create a new file named `<your-page-name>.tsx`
+- you can further import your own React Components and use it under `render` fnction
+
+### Setting Up Firebase
+
+- create a new project in [Firebase Console](https://console.firebase.google.com/) ,
+  if you haven't already
+- enable `Authentication (Password Based)` , `Database` and `Storage` on your project
+- copy and paste your api credentials in `firebaseConfig.json`
+- To add a table of your own go to your Firebase project -> database -> create database , again ,
+  if you haven't already
+- use the following code under your project to update/create a table
+
+```tsx
+import firebase from 'src/firebase';
+const ref = firebase
+  .database()
+  .ref()
+  .child('table-name');
+ref.child('unique-name-for--the-entry').set(/* table fields*/);
+```
+
+- to get the data from firebase table use
+
+```tsx
+var Id = id; //unique-name-for--the-entry
+firebase
+  .database()
+  .ref('/table-name/' + userId)
+  .once('value')
+  .then(function(snapshot) {
+    const data = snapshot.val();
+    //perform operation on data here
+  });
+```
+
+# Note
+
+if you wish to fetch data in getInitialProps of a page , make sure you have enabled CORS on your
+server , alternatively you can use this chrome extension
+[Allow-Control-Allow-Origin: \*](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en)
+
 # Screens
 
 ### SignIn Page
