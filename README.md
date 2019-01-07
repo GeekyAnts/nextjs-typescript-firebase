@@ -115,7 +115,7 @@ npm run dev;
 
 ### ForgotPassword Page
 
-![ForgotPassword](/screens/FotgotPassword.png)
+![ForgotPassword](/screens/ForgotPassword.png)
 
 ### Dashboard Page
 
