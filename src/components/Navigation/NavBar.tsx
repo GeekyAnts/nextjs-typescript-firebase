@@ -61,24 +61,28 @@ class NavBar extends Component<
               <span
                 className={styles['dropdown-item']}
                 onClick={() => Router.push('/profile/picture-update')}
+                tabIndex={0}
               >
                 Change Profile Picture
               </span>
               <span
                 className={styles['dropdown-item']}
                 onClick={() => Router.push('/profile/details-update')}
+                tabIndex={0}
               >
                 Update Profile Details
               </span>
               <span
                 className={styles['dropdown-item']}
                 onClick={() => Router.push('/reset-password')}
+                tabIndex={0}
               >
                 Change Password
               </span>
               <span
                 className={styles['dropdown-item']}
                 onClick={() => this.props.signOutUser()}
+                tabIndex={0}
               >
                 Sign Out
               </span>
