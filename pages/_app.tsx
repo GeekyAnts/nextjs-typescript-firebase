@@ -8,6 +8,8 @@ export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
 
+    ctx.reduxStore = store;
+
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
